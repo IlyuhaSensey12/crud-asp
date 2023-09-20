@@ -9,6 +9,9 @@ namespace CRUD.Model
 	{
         public DbSet<Person> Persons { get; set; }
 		public DbSet<Company> Companies { get; set; }
+        public DbSet<Order> Orders { get; set; }
+		public DbSet<Customer> Customers { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options ) : base(options)
 		{
 			try
@@ -27,6 +30,14 @@ namespace CRUD.Model
 				Console.WriteLine(ex.Message);
 			}
 		}
-	}
+
+  //      protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{ 
+  //          modelBuilder.Entity<Customer>()
+  //              .HasMany(customer => customer.Orders)    
+  //              .WithOne(order => order.Customer)       
+  //              .HasForeignKey(order => order.CustomerId);
+  //      }
+    }
 }
 

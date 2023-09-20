@@ -24,7 +24,12 @@ namespace CRUD.Controllers
 		[HttpGet("{personId:Int}")]
 		public async Task<ActionResult<Person>> GetById(int personId)
 		{
-			var person = await _dbContext.Persons.FindAsync(personId);
+            if (personId == null)
+            {
+                return NotFound();
+            }
+
+            var person = await _dbContext.Persons.FindAsync(personId);
 			return person;
 		}
 
@@ -47,7 +52,12 @@ namespace CRUD.Controllers
 		[HttpDelete("{personId:int}")]
         public async Task<ActionResult> Delete(int personId)
 		{
-			var person = await _dbContext.Persons.FindAsync(personId);
+            if (personId == null)
+            {
+                return NotFound();
+            }
+
+            var person = await _dbContext.Persons.FindAsync(personId);
 			_dbContext.Persons.Remove(person);
 			await _dbContext.SaveChangesAsync();
 			return Ok();
